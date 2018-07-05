@@ -13,5 +13,5 @@ function Sleep(props){
 Sleep.propTypes = {
   energy: PropTypes.number.isRequired,
   onSleep: PropTypes.func.isRequired
-}
+};
 export default Sleep;

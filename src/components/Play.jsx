@@ -13,5 +13,5 @@ function Play(props){
 Play.propTypes = {
   boredom: PropTypes.number.isRequired,
   onPlay: PropTypes.func.isRequired
-}
+};
 export default Play;

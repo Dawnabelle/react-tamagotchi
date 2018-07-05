@@ -13,5 +13,5 @@ function Feed(props){
 Feed.propTypes = {
   hunger: PropTypes.number.isRequired,
   onFeed: PropTypes.func.isRequired
-}
+};
 export default Feed;

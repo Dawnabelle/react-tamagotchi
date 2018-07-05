@@ -2,6 +2,7 @@ import React from 'react';
 import Feed from './Feed';
 import Sleep from './Sleep';
 import Play from './Play';
+import Death from './Death';
 
 class Pet extends React.Component{
 
@@ -10,7 +11,8 @@ class Pet extends React.Component{
     this.state = {
       hunger: 10,
       boredom: 10,
-      energy: 10
+      energy: 10,
+      dead: false
     };
     this.handleFeed = this.handleFeed.bind(this);
     this.handleSleep = this.handleSleep.bind(this);
@@ -29,16 +31,25 @@ class Pet extends React.Component{
     let newHunger = this.state.hunger;
     newHunger -= 1;
     this.setState({hunger: newHunger});
+    if(this.state.hunger === 0){
+      this.setState({dead: true});
+    }
   }
   updatePlayTime(){
     let newBoredom = this.state.boredom;
     newBoredom -= 1;
     this.setState({boredom: newBoredom});
+    if(this.state.boredom === 0){
+      this.setState({dead: true});
+    }
   }
   updateSleepTime(){
     let newEnergy = this.state.energy;
     newEnergy -= 1;
     this.setState({energy: newEnergy});
+    if(this.state.energy === 0){
+      this.setState({dead: true});
+    }
   }
 
   componentDidMount() {
@@ -56,14 +67,22 @@ class Pet extends React.Component{
     );
   }
   render(){
-    return(
-      <div>
+    let currentlyVisibleContent = null;
+    if(this.state.dead){
+      currentlyVisibleContent = <Death />;
+    }else {
+      currentlyVisibleContent = <div>
         <Feed hunger={this.state.hunger}
           onFeed={this.handleFeed} />
         <Sleep energy={this.state.energy}
           onSleep={this.handleSleep} />
         <Play boredom={this.state.boredom}
           onPlay={this.handlePlay} />
+      </div>;
+    }
+    return(
+      <div>
+        {currentlyVisibleContent}
       </div>
     );
 
